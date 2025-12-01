@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Link Generator</title>
+<title>FastStream - HD ভিডিও ডাউনলোড</title>
 
 <style>
 /* ---------- Base Styles ---------- */
@@ -19,11 +19,119 @@ body {
   min-height: 100vh;
 }
 
+/* ---------- Header ---------- */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(11, 16, 32, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+  z-index: 1000;
+  padding: 15px 0;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  background: linear-gradient(90deg, #7c3aed, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo span {
+  color: #60a5fa;
+  font-size: 14px;
+}
+
+.site-tagline {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* ---------- Main Box ---------- */
 #box {
   text-align: center;
   width: 100%;
-  max-width: 450px;
-  padding: 20px;
+  max-width: 500px;
+  padding: 30px;
+  background: rgba(17, 24, 39, 0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-top: 60px;
+}
+
+/* ---------- File Info Section ---------- */
+.file-info {
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: left;
+  border-left: 4px solid #7c3aed;
+}
+
+.file-info h3 {
+  margin-top: 0;
+  color: #60a5fa;
+  font-size: 16px;
+}
+
+.file-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-label {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ---------- Security Badge ---------- */
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin: 15px 0;
+  border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 /* ---------- Heading ---------- */
@@ -47,24 +155,41 @@ body {
 
 /* ---------- Progress Bar ---------- */
 #prog {
-  width: 200px;
-  height: 8px;
-  background: rgba(255,255,255,0.2);
+  width: 100%;
+  height: 10px;
+  background: rgba(255,255,255,0.1);
   border-radius: 30px;
-  margin: 15px auto;
+  margin: 20px auto;
   overflow: hidden;
+  position: relative;
 }
 #bar {
   height: 100%;
   width: 0;
   background: linear-gradient(90deg,#7c3aed,#4f46e5);
   transition: width .25s ease;
+  border-radius: 30px;
+}
+#prog::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* ---------- Message ---------- */
 #msg {
   font-size: 16px;
-  margin-top: 8px;
+  margin-top: 15px;
+  color: #94a3b8;
 }
 
 /* ---------- Done Icon ---------- */
@@ -76,14 +201,15 @@ body {
   margin-top: 8px;
   font-size: 22px;
   font-weight: 600;
+  color: #7c3aed;
 }
 
 /* ---------- Buttons Grid ---------- */
 #btns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 15px;
+  margin-top: 25px;
 }
 
 #watch, #down {
@@ -92,71 +218,81 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  padding: 12px 0;
-  border-radius: 10px;
+  padding: 15px 0;
+  border-radius: 12px;
   font-size: 17px;
-  transition: .2s;
+  transition: .3s;
+  gap: 10px;
 }
 
 #watch {
   background: linear-gradient(90deg,#7c3aed,#4f46e5);
   color: #fff;
+  box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
 }
 
 #down {
-  background: #1a1a28;
-  border: 1px solid rgba(124,58,237,.5);
+  background: rgba(30, 41, 59, 0.8);
+  border: 2px solid rgba(124, 58, 237, 0.5);
   color: #fff;
 }
 
 #watch:hover, #down:hover {
-  transform: scale(1.03);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+/* ---------- Footer Text ---------- */
+.footer-text {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.footer-text a {
+  color: #60a5fa;
+  text-decoration: none;
 }
 
 /* ---------- MOBILE SMALL UI ---------- */
 @media (max-width: 600px) {
-  #box {
-    padding: 15px;
+  .header-content {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
   }
-
-  #title {
-    font-size: 22px;
-  }
-
-  #spin {
-    width: 45px;
-    height: 45px;
-    border-width: 4px;
-    margin: 15px auto;
-  }
-
-  #prog {
-    width: 160px;
-    height: 6px;
-  }
-
-  #msg {
-    font-size: 14px;
-  }
-
-  #watch, #down {
-    padding: 10px 0;
-    font-size: 16px;
-    border-radius: 8px;
-  }
-
-  #done svg {
-    width: 70px;
-    height: 70px;
-  }
-
-  #done h3 {
+  
+  .logo h1 {
     font-size: 20px;
   }
-
-  /* Mobile: Button 2-column grid */
+  
+  #box {
+    padding: 20px 15px;
+    margin: 80px 15px 20px;
+    border-radius: 15px;
+  }
+  
+  .file-details {
+    grid-template-columns: 1fr;
+  }
+  
+  #title {
+    font-size: 20px;
+  }
+  
+  #spin {
+    width: 50px;
+    height: 50px;
+  }
+  
   #btns {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  #watch, #down {
+    padding: 14px 0;
   }
 }
 </style>
@@ -164,9 +300,23 @@ body {
 
 <body>
 
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <h1>FastStream</h1>
+      <div>
+
+      </div>
+    </div>
+
+</header>
+
+<!-- Main Content -->
 <div id="box">
 
   <h2 id="title">আপনার লিঙ্ক তৈরি হচ্ছে...</h2>
+  
 
   <div id="spin"></div>
 
@@ -174,7 +324,7 @@ body {
     <div id="bar"></div>
   </div>
 
-  <p id="msg">দয়া করে অপেক্ষা করুন...</p>
+  <p id="msg">সার্ভার থেকে ডেটা প্রস্তুত করা হচ্ছে... দয়া করে অপেক্ষা করুন</p>
 
   <!-- Done -->
   <div id="done" style="display:none;margin:20px;">
@@ -185,13 +335,29 @@ body {
         fill="none" stroke="#7c3aed" stroke-width="8"
         stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <h3>লিঙ্ক তৈরি সম্পন্ন!</h3>
+    <h3>ডাউনলোড প্রস্তুত!</h3>
+    <p style="color:#94a3b8;margin-top:5px;">ফাইল সফলভাবে প্রস্তুত হয়েছে</p>
   </div>
 
   <!-- Buttons -->
   <div id="btns" style="display:none;">
-    <a id="watch" href="#">▶ এখন দেখুন</a>
-    <a id="down" href="#">⬇ ডাউনলোড</a>
+    <a id="watch" href="#">
+      <span>▶</span> সরাসরি দেখুন
+    </a>
+    <a id="down" href="#">
+      <span>⬇</span> ডাউনলোড করুন
+    </a>
+  </div>
+
+  <!-- Footer Text -->
+  <div class="footer-text">
+    <p>⚠️ দয়া করে 24 ঘন্টার মধ্যে ডাউনলোড করুন। লিঙ্কটি স্বয়ংক্রিয়ভাবে মেয়াদ উত্তীর্ণ হবে।</p>
+    <p>✅ 100% ভাইরাসমুক্ত | ⚡ উচ্চ গতি ডাউনলোড | 🔒 নিরাপদ সংযোগ</p>
+    <p style="margin-top:10px;font-size:11px;">
+      <a href="#">ব্যবহারের শর্তাবলী</a> | 
+      <a href="#">গোপনীয়তা নীতি</a> | 
+      <a href="#">সাহায্য</a>
+    </p>
   </div>
 
 </div>
@@ -215,8 +381,9 @@ const redirectURL = "https://adx3uq.blogspot.com/p/sia.html";
   const i = setInterval(() => {
     p += 10;
 
-    if (p < 40) m.textContent = "তৈরি হচ্ছে...";
-    else if (p < 80) m.textContent = "প্রায় সম্পন্ন...";
+    if (p < 30) m.textContent = "সার্ভার সংযোগ করা হচ্ছে...";
+    else if (p < 60) m.textContent = "ফাইল এনক্রিপ্ট করা হচ্ছে...";
+    else if (p < 90) m.textContent = "ডাউনলোড লিঙ্ক তৈরি হচ্ছে...";
     else m.textContent = "শেষ ধাপ চলছে...";
 
     b.style.width = p + "%";
@@ -226,7 +393,7 @@ const redirectURL = "https://adx3uq.blogspot.com/p/sia.html";
       s.style.display = "none";
       document.getElementById("prog").style.display = "none";
       m.style.display = "none";
-      t.textContent = "সব প্রস্তুত!";
+      t.textContent = "ডাউনলোড প্রস্তুত!";
       d.style.display = "block";
       btns.style.display = "grid";
     }
