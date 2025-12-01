@@ -30,6 +30,7 @@ body {
 #title {
   font-size: 24px;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 /* ---------- Spinner ---------- */
@@ -66,17 +67,35 @@ body {
   margin-top: 8px;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Done Icon ---------- */
+#done svg {
+  width: 90px;
+  height: 90px;
+}
+#done h3 {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* ---------- Buttons Grid ---------- */
+#btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 #watch, #down {
   text-decoration: none;
-  display: block;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   padding: 12px 0;
   border-radius: 10px;
-  margin: 8px 0;
-  transition: .2s;
   font-size: 17px;
+  transition: .2s;
 }
 
 #watch {
@@ -92,16 +111,6 @@ body {
 
 #watch:hover, #down:hover {
   transform: scale(1.03);
-}
-
-/* ---------- Done Icon ---------- */
-#done svg {
-  width: 90px;
-  height: 90px;
-}
-#done h3 {
-  margin-top: 8px;
-  font-size: 22px;
 }
 
 /* ---------- MOBILE SMALL UI ---------- */
@@ -144,6 +153,11 @@ body {
   #done h3 {
     font-size: 20px;
   }
+
+  /* Mobile: Button 2-column grid */
+  #btns {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>
 </head>
@@ -175,7 +189,7 @@ body {
   </div>
 
   <!-- Buttons -->
-  <div id="btns" style="display:none;margin-top:10px;">
+  <div id="btns" style="display:none;">
     <a id="watch" href="#">▶ এখন দেখুন</a>
     <a id="down" href="#">⬇ ডাউনলোড</a>
   </div>
@@ -214,7 +228,7 @@ const redirectURL = "https://adx3uq.blogspot.com/p/sia.html";
       m.style.display = "none";
       t.textContent = "সব প্রস্তুত!";
       d.style.display = "block";
-      btns.style.display = "block";
+      btns.style.display = "grid";
     }
   }, 60);
 
