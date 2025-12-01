@@ -35,7 +35,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 20px;
 }
@@ -55,17 +55,6 @@ body {
   background-clip: text;
 }
 
-.logo span {
-  color: #60a5fa;
-  font-size: 14px;
-}
-
-.site-tagline {
-  font-size: 14px;
-  color: #94a3b8;
-  margin-top: 2px;
-}
-
 /* ---------- Main Box ---------- */
 #box {
   text-align: center;
@@ -77,61 +66,6 @@ body {
   border: 1px solid rgba(124, 58, 237, 0.3);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   margin-top: 60px;
-}
-
-/* ---------- File Info Section ---------- */
-.file-info {
-  background: rgba(30, 41, 59, 0.5);
-  border-radius: 12px;
-  padding: 15px;
-  margin: 20px 0;
-  text-align: left;
-  border-left: 4px solid #7c3aed;
-}
-
-.file-info h3 {
-  margin-top: 0;
-  color: #60a5fa;
-  font-size: 16px;
-}
-
-.file-details {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.detail-label {
-  color: #94a3b8;
-  font-size: 14px;
-}
-
-.detail-value {
-  color: #e2e8f0;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-/* ---------- Security Badge ---------- */
-.security-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(34, 197, 94, 0.1);
-  color: #4ade80;
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin: 15px 0;
-  border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 /* ---------- Heading ---------- */
@@ -258,8 +192,6 @@ body {
 /* ---------- MOBILE SMALL UI ---------- */
 @media (max-width: 600px) {
   .header-content {
-    flex-direction: column;
-    gap: 10px;
     padding: 10px 15px;
   }
   
@@ -273,10 +205,6 @@ body {
     border-radius: 15px;
   }
   
-  .file-details {
-    grid-template-columns: 1fr;
-  }
-  
   #title {
     font-size: 20px;
   }
@@ -287,12 +215,17 @@ body {
   }
   
   #btns {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr; /* 2 columns on mobile */
     gap: 12px;
   }
   
   #watch, #down {
     padding: 14px 0;
+    font-size: 16px;
+  }
+  
+  .footer-text {
+    font-size: 11px;
   }
 }
 </style>
@@ -305,18 +238,14 @@ body {
   <div class="header-content">
     <div class="logo">
       <h1>FastStream</h1>
-      <div>
-
-      </div>
     </div>
-
+  </div>
 </header>
 
 <!-- Main Content -->
 <div id="box">
 
   <h2 id="title">আপনার লিঙ্ক তৈরি হচ্ছে...</h2>
-  
 
   <div id="spin"></div>
 
