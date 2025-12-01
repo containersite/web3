@@ -1,234 +1,159 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Link Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Access</title>
 
-<style>
-/* ---------- Base Styles ---------- */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Inter, sans-serif;
-  background: #0b1020;
-  color: #e6eef8;
-}
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-#box {
-  text-align: center;
-  padding: 70px 20px;
-  min-height: 100vh;
-}
+        body {
+            background: #0b1020;
+            color: #e6eef8;
+            font-family: "Inter", sans-serif;
+        }
 
-/* ---------- Spinner ---------- */
-#spin {
-  width: 70px;
-  height: 70px;
-  border: 6px solid transparent;
-  border-top-color: #7c3aed;
-  border-radius: 50%;
-  margin: 28px auto;
-  animation: spin 0.9s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+        /* Main Wrapper */
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
 
-/* ---------- Progress Bar ---------- */
-#prog {
-  width: 210px;
-  height: 10px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 30px;
-  margin: 15px auto;
-  overflow: hidden;
-}
-#bar {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg,#7c3aed,#4f46e5);
-  transition: width .25s ease;
-}
+        /* Title */
+        .title {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
 
-/* ---------- Buttons ---------- */
-#watch, #down {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 600;
-  padding: 12px 20px;
-  border-radius: 10px;
-  margin: 8px;
-  transition: .2s;
-  font-size: 18px;
-}
+        /* Progress Bar Box */
+        .progress-box {
+            width: 100%;
+            background: #1a2036;
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+        }
 
-#watch {
-  background: linear-gradient(90deg,#7c3aed,#4f46e5);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(124,58,237,.4);
-}
+        .progress-label {
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 500;
+        }
 
-#down {
-  background: #1a1a28;
-  border: 1px solid rgba(124,58,237,.5);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(124,58,237,.25);
-}
+        .progress-bar {
+            width: 100%;
+            height: 14px;
+            background: #111626;
+            border-radius: 20px;
+            overflow: hidden;
+        }
 
-#watch:hover, #down:hover {
-  transform: scale(1.06);
-}
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4facfe, #35c9ff);
+            border-radius: 20px;
+            transition: width 1.2s ease-in-out;
+        }
 
-/* ---------- Done Icon ---------- */
-#done svg {
-  width: 100px;
-  height: 100px;
-}
-#done h3 {
-  margin-top: 10px;
-  font-size: 26px;
-}
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            background: #3d7cff;
+            padding: 14px 0;
+            border-radius: 12px;
+            font-size: 18px;
+            margin: 12px 0;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+        }
 
-/* ----------------------------------------------------
-     🔥 MOBILE + TABLET RESPONSIVE BIG UI 
----------------------------------------------------- */
-@media (max-width: 768px) {
+        .btn:hover {
+            background: #2f6af0;
+        }
 
-  #box {
-    padding: 100px 20px;
-  }
+        /* Responsive for Mobile */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 26px;
+            }
 
-  #title {
-    font-size: 32px;
-  }
+            .btn {
+                font-size: 17px;
+                padding: 14px;
+            }
 
-  #msg {
-    font-size: 22px;
-  }
+            .progress-box {
+                padding: 14px;
+            }
 
-  #spin {
-    width: 130px;
-    height: 130px;
-    border-width: 12px;
-    margin: 50px auto;
-  }
+            .progress-bar {
+                height: 13px;
+            }
+        }
 
-  #prog {
-    width: 320px;
-    height: 18px;
-    margin-top: 30px;
-  }
+        @media (max-width: 360px) {
+            .title {
+                font-size: 24px;
+            }
 
-  #done svg {
-    width: 170px;
-    height: 170px;
-  }
-
-  #done h3 {
-    font-size: 32px;
-  }
-
-  #btns {
-    margin-top: 45px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  #watch, #down {
-    width: 100%;
-    padding: 20px 0;
-    font-size: 24px;
-    border-radius: 14px;
-  }
-}
-</style>
+            .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div id="box">
+    <div class="container">
 
-  <h2 id="title">আপনার লিঙ্ক তৈরি হচ্ছে...</h2>
+        <h2 class="title">প্রিমিয়াম ভিডিও আনলক হচ্ছে…</h2>
 
-  <div id="spin"></div>
+        <div class="progress-box">
+            <div class="progress-label">Processing… <span id="percent">0%</span></div>
 
-  <div id="prog">
-    <div id="bar"></div>
-  </div>
+            <div class="progress-bar">
+                <span id="bar"></span>
+            </div>
+        </div>
 
-  <p id="msg">দয়া করে অপেক্ষা করুন...</p>
+        <!-- Buttons -->
+        <a href="https://example.com" class="btn">WATCH NOW</a>
+        <a href="https://example.com" class="btn">DOWNLOAD</a>
 
-  <!-- Done -->
-  <div id="done" style="display:none;margin:20px;">
-    <svg viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="44" fill="none"
-        stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
-      <path d="M40 62 L54 76 L80 48"
-        fill="none" stroke="#7c3aed" stroke-width="8"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <h3>লিঙ্ক তৈরি সম্পন্ন!</h3>
-  </div>
+    </div>
 
-  <!-- Buttons -->
-  <div id="btns" style="display:none;margin-top:20px;">
-    <a id="watch" href="#">▶ এখন দেখুন</a>
-    <a id="down" href="#">⬇ ডাউনলোড</a>
-  </div>
+    <script>
+        let bar = document.getElementById("bar");
+        let percent = document.getElementById("percent");
+        let progress = 0;
 
-</div>
-
-<script>
-// ------------ URLs ------------
-const watchURL = "https://watchvarse4.blogspot.com/p/blog-page.html";
-const downloadURL = "https://watchvarse4.blogspot.com/p/blog-page.html";
-const redirectURL = "https://adx3uq.blogspot.com/p/sia.html";
-
-(function () {
-  const b = document.getElementById("bar"),
-        m = document.getElementById("msg"),
-        t = document.getElementById("title"),
-        s = document.getElementById("spin"),
-        d = document.getElementById("done"),
-        btns = document.getElementById("btns");
-
-  let p = 0;
-
-  const i = setInterval(() => {
-    p += 10;
-
-    if (p < 40) m.textContent = "তৈরি হচ্ছে...";
-    else if (p < 80) m.textContent = "প্রায় সম্পন্ন...";
-    else m.textContent = "শেষ ধাপ চলছে...";
-
-    b.style.width = p + "%";
-
-    if (p >= 100) {
-      clearInterval(i);
-      s.style.display = "none";
-      document.getElementById("prog").style.display = "none";
-      m.style.display = "none";
-      t.textContent = "সব প্রস্তুত!";
-      d.style.display = "block";
-      btns.style.display = "block";
-    }
-  }, 60);
-
-  function go(link) {
-    const w = window.open(link, "_blank");
-    if (!w) window.location.href = link;
-
-    setTimeout(() => window.location.href = redirectURL, 20);
-  }
-
-  document.getElementById("watch").onclick = e => { e.preventDefault(); go(watchURL); };
-  document.getElementById("down").onclick = e => { e.preventDefault(); go(downloadURL); };
-
-})();
-</script>
+        let load = setInterval(() => {
+            if (progress >= 100) {
+                clearInterval(load);
+            } else {
+                progress++;
+                bar.style.width = progress + "%";
+                percent.innerText = progress + "%";
+            }
+        }, 25);
+    </script>
 
 </body>
 </html>
