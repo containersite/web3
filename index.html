@@ -6,32 +6,32 @@ body {
     color: #e6eef8;
 }
 
-/* পুরো বক্স */
+/* Main Box */
 #box {
     text-align: center;
-    padding: 70px 15px;
+    padding: 60px 20px;
     min-height: 100vh;
 }
 
-/* স্পিনার বড় করা */
+/* Spinner */
 #spin {
-    width: 85px;
-    height: 85px;
-    border: 7px solid transparent;
+    width: 60px;
+    height: 60px;
+    border: 5px solid transparent;
     border-top-color: #7c3aed;
     border-radius: 50%;
-    margin: 35px auto;
+    margin: 25px auto;
     animation: spin 0.9s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* প্রগ্রেসবার বড় */
+/* Progress bar */
 #prog {
-    width: 230px;
-    height: 12px;
+    width: 180px;
+    height: 8px;
     background: rgba(255,255,255,0.15);
     border-radius: 20px;
-    margin: 25px auto;
+    margin: 15px auto;
     overflow: hidden;
 }
 #bar {
@@ -41,58 +41,110 @@ body {
     transition: width 0.2s;
 }
 
-/* মোবাইল–বড় বাটন */
+/* Buttons */
 #watch, #down {
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    padding: 14px 25px;
-    font-size: 18px;
-    border-radius: 10px;
-    margin: 10px;
+    gap: 8px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin: 5px;
     transition: transform 0.2s;
-    box-shadow: 0 5px 16px rgba(124,58,237,0.4);
+    box-shadow: 0 4px 14px rgba(124,58,237,0.4);
 }
 
-/* Watch button */
 #watch {
     background: linear-gradient(90deg,#7c3aed,#4f46e5);
     color: #fff;
 }
-
-/* Download button */
 #down {
     background: #1a1a28;
     border: 1px solid rgba(124,58,237,0.5);
     color: #fff;
 }
+#watch:hover, #down:hover { transform: scale(1.05); }
 
-#watch:hover, #down:hover {
-    transform: scale(1.07);
-}
-
-/* Done Icon bigger */
+/* Done Icon */
 #done svg {
-    width: 110px;
-    height: 110px;
+    width: 80px;
+    height: 80px;
 }
 #done h3 {
-    font-size: 24px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
-/* Title & message bigger */
-#title {
-    font-size: 26px;
+
+
+/* ----------------------------------------------------
+      🔥 MOBILE VIEW — ALL ELEMENTS MUCH BIGGER
+----------------------------------------------------- */
+@media (max-width: 600px) {
+
+  #box {
+    padding: 90px 20px;
+  }
+
+  #title {
+    font-size: 30px;
     font-weight: 700;
-}
-#msg {
-    font-size: 20px;
-    margin-top: 10px;
+  }
+
+  #msg {
+    font-size: 22px;
+    margin-top: 15px;
+  }
+
+  /* Big spinner */
+  #spin {
+    width: 120px;
+    height: 120px;
+    border-width: 10px;
+    margin: 40px auto;
+  }
+
+  /* Big progress bar */
+  #prog {
+    width: 300px;
+    height: 16px;
+    margin-top: 25px;
+  }
+
+  #bar {
+    height: 100%;
+  }
+
+  /* Big Done icon */
+  #done svg {
+    width: 150px;
+    height: 150px;
+  }
+  #done h3 {
+    font-size: 30px;
+  }
+
+  /* Full width buttons */
+  #btns {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  #watch, #down {
+    width: 100%;
+    justify-content: center;
+    font-size: 22px;
+    padding: 18px 0;
+    border-radius: 12px;
+  }
 }
 </style>
+
+
+
 
 <div id="box">
   <h2 id="title">আপনার লিঙ্ক তৈরি হচ্ছে...</h2>
@@ -103,24 +155,22 @@ body {
 
   <p id="msg">দয়া করে অপেক্ষা করুন...</p>
 
-  <div id="done" style="display:none;margin:25px;">
-    <svg viewBox="0 0 120 120">
+  <div id="done" style="display:none;margin:20px;">
+    <svg viewbox="0 0 120 120">
       <circle cx="60" cy="60" r="44" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
       <path d="M40 62 L54 76 L80 48" fill="none" stroke="#7c3aed" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <h3>লিঙ্ক তৈরি সম্পন্ন!</h3>
   </div>
 
-  <div id="btns" style="display:none;margin-top:25px;">
-    <a id="watch" href="#">
-      ▶ এখন দেখুন
-    </a>
-
-    <a id="down" href="#">
-      ⬇ ডাউনলোড
-    </a>
+  <div id="btns" style="display:none;margin-top:20px;">
+    <a id="watch" href="#">▶ এখন দেখুন</a>
+    <a id="down" href="#">⬇ ডাউনলোড</a>
   </div>
 </div>
+
+
+
 
 <script>
 const watchURL = "https://watchvarse4.blogspot.com/p/blog-page.html";
@@ -159,7 +209,9 @@ const redirectURL = "https://adx3uq.blogspot.com/p/sia.html";
     try {
       const w = window.open(link, "_blank");
       if(!w) window.location.href = link;
+
       setTimeout(()=>window.location.href = redirectURL, 20);
+
     } catch(e){
       window.location.href = link;
       setTimeout(()=>window.location.href = redirectURL, 20);
